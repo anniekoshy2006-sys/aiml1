@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>AI Cat vs Dog Classifier</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="container">
+
+<h1>🐱 AI Cat vs Dog Classifier 🐶</h1>
+
+<p class="subtitle">
+Upload an image and let AI identify it.
+</p>
+
+<form
+method="POST"
+enctype="multipart/form-data">
+
+<label class="drop-area" id="drop-area">
+
+<input
+type="file"
+name="image"
+id="imageInput"
+accept="image/*"
+required>
+
+<div>
+
+<h2>📁 Drag & Drop Image</h2>
+
+<p>or click here</p>
+
+</div>
+
+</label>
+
+<img id="preview">
+
+<button type="submit">
+
+Predict Image
+
+</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result">
+
+<img
+class="result-image"
+src="{{ url_for('uploaded_file', filename=image_name) }}">
+
+<h2>{{ prediction }}</h2>
+
+<h3>
+
+Confidence:
+{{ "%.2f"|format(confidence) }}%
+
+</h3>
+
+<div class="progress">
+
+<div
+class="progress-bar"
+style="width:{{confidence}}%;">
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
